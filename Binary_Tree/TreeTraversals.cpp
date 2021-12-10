@@ -745,7 +745,30 @@ vector<int> rightView2(node *root)
     return ans;
 }
 
-
+// Given the root of a binary tree, return the bottommost & leftmost value in the last row of the tree
+int leftMostNode(node *root)
+{
+    if (!root)
+        return -1;
+    queue<node *> q;
+    q.push(root);
+    int ans;
+    while (!q.empty())
+    {
+        int n = q.size();
+        ans = q.front()->data;
+        while (n--)
+        {
+            node *curr = q.front();
+            if (curr->left)
+                q.push(curr->left);
+            if (curr->right)
+                q.push(curr->right);
+            q.pop();
+        }
+    }
+    return ans;
+}
 
 int main()
 {
@@ -845,8 +868,9 @@ int main()
     //     cout << a << " ";
 
     // LEFT VIEW
-    vector<int> RightView = leftView2(root);
-    for (auto a : RightView)
-        cout << a << " ";
+    // vector<int> RightView = leftView2(root);
+    // for (auto a : RightView)
+    //     cout << a << " ";
+    cout<<leftMostNode(root);
     return 0;
 }
