@@ -871,6 +871,6 @@ int main()
     // vector<int> RightView = leftView2(root);
     // for (auto a : RightView)
     //     cout << a << " ";
-    cout<<leftMostNode(root);
+    cout << leftMostNode(root);
     return 0;
 }
