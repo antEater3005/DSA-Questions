@@ -45,18 +45,30 @@ bool isSubsetTD(vector<int> arr, int size, int targetSum)
     {
         for (int j = 1; j < targetSum + 1; j++)
         {
-            if (arr[i - 1] > targetSum)
+            if (arr[i - 1] > j)
                 memo[i][j] = memo[i - 1][j];
             else
-                memo[i - 1][j] = memo[i - 1][j] || memo[i - 1][j - arr[i - 1]];
+                memo[i][j] = memo[i - 1][j] || memo[i - 1][j - arr[i - 1]];
         }
     }
     return memo[size][targetSum]; // return the ans;
+}
+// Equal Sum Partition problem: this function checks whether the given array can be divided into two subsets of equal partition;
+bool EqualSumPartition(vector<int> arr, int size)
+{
+    int sum = 0;
+    for (auto a : arr)
+        sum += a;
+   
+    if (sum % 2 == 1)
+        return false;
+    else
+        return isSubsetTD(arr, size, sum / 2);
 }
 int main()
 {
     vector<int> arr = {3, 34, 4, 12, 5, 2};
     int targetSum = 14, size = arr.size();
-    cout << isSubsetTD(arr, targetSum, size);
+    cout << EqualSumPartition(arr, size);
     return 0;
 }
