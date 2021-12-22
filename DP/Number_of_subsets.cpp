@@ -17,7 +17,7 @@ int numberOfSubset(vector<int> arr, int sum)
                 t[i][j] = t[i - 1][j];
     return t[n][sum];
 }
-int numberOfSubset2(vector<int> arr, int sum)
+int numberOfSubset2(vector<int> arr, int sum) // Not working properly
 {
     vector<int> t(sum + 1, 0);
     t[0] = 1;
@@ -30,7 +30,7 @@ int numberOfSubset2(vector<int> arr, int sum)
 }
 int main()
 {
-    vector<int> a = {4,3,2,3,5,2,1};
+    vector<int> a = {4, 3, 2, 3, 5, 2, 1};
     int sum = 4;
     cout << numberOfSubset2(a, 10);
     return 0;
