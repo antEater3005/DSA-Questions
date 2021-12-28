@@ -12,35 +12,20 @@ int knapSack1(vector<int> weight, vector<int> value, int capacity, int n)
         return knapSack1(weight, value, capacity, n - 1);
 }
 // Knapsack problem using recursion and memoization
-
-// vector<vector<int>>
-//     memo{101, vector<int>{151, -1}}; // initialization of memo having the constraints of having only 100 items and weight capacity of 150;
-// int knapSack(vector<int> weight, vector<int> value, int capacity, int n)
-// {
-//     if (n == 0 || capacity == 0)
-//         return 0;
-//     if (memo[n - 1][capacity] != -1) // before calling the function again we check for the values computed earlier if present then return the value;
-//         return memo[n - 1][capacity];
-//     if (capacity >= weight[n - 1])
-//         return memo[n - 1][capacity] = max(value[n - 1] + knapSack(weight, value, capacity - value[n - 1], n - 1), knapSack(weight, value, capacity, n - 1)); // we store the calculated value in memo.
-//     else if (capacity < weight[n - 1])
-//         return memo[n - 1][capacity] = knapSack(weight, value, capacity, n - 1); // we store the calculated value in memo.
-// }
-
 int knapSackUtil(vector<int> weight, vector<int> value, int capacity, int n, vector<vector<int>> &memo)
 {
     if (n == 0 || capacity == 0) // base case
         return 0;
-    if (memo[n - 1][capacity] != -1)
+    if (memo[n - 1][capacity] != -1) // before calling the function again we check for the values computed earlier if present then return the value;
         return memo[n - 1][capacity];
     if (weight[n - 1] <= capacity)
-        return memo[n - 1][capacity] = max(value[n - 1] + knapSackUtil(weight, value, capacity - weight[n - 1], n - 1, memo), knapSackUtil(weight, value, capacity, n - 1, memo));
+        return memo[n - 1][capacity] = max(value[n - 1] + knapSackUtil(weight, value, capacity - weight[n - 1], n - 1, memo), knapSackUtil(weight, value, capacity, n - 1, memo)); // we store the calculated value in memo.
     else if (weight[n - 1] > capacity)
-        return memo[n - 1][capacity] = knapSackUtil(weight, value, capacity, n - 1, memo);
+        return memo[n - 1][capacity] = knapSackUtil(weight, value, capacity, n - 1, memo); // we store the calculated value in memo.
 }
 int knapSack2(vector<int> weight, vector<int> value, int capacity, int n)
 {
-    vector<vector<int>> memo(n + 1, vector<int>(capacity + 1, -1));
+    vector<vector<int>> memo(n + 1, vector<int>(capacity + 1, -1)); // initialization of memo having the constraints of having only 100 items and weight capacity of 150;
     return knapSackUtil(weight, value, capacity, n, memo);
 }
 
