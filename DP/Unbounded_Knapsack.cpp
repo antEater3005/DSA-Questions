@@ -1,4 +1,3 @@
-
 // In unbounded knapsack there are multiple occurrences of a single item ;
 // An item is not marked as processed until it's declined at some point of time.
 #include <bits/stdc++.h>
