@@ -33,7 +33,33 @@ int unbounded_knapsack_memo(vector<int> weight, vector<int> values, int size, in
     return unbounded_knapsack_memo_util(weight, values, size, capacity, memo);
 }
 // Top-Down approach:
-
+int unbounded_knapsack_topDown(vector<int> weight, vector<int> values, int size, int capacity) //incomplete
+{
+    int memo[size + 1][capacity + 1];
+    for (int i = 0; i < size + 1; i++)
+        memo[i][0] = 0;
+    for (int i = 1; i < capacity + 1; i++)
+        memo[0][i] = 0;
+    int i = 1, j = 1;
+    while (i <= size)
+    {
+        while (j <= capacity)
+        {
+            if (weight[i - 1] > j)
+            {
+                memo[i][j] = memo[i - 1][j];
+                i++;
+            }
+            else
+            {
+                memo[i][j] = max(values[i - 1] + memo[i - 1][j - weight[i - 1]], memo[i - 1][j]);
+            }
+            j++;
+        }
+        i++;
+    }
+    return memo[size][capacity];
+}
 int main()
 {
 
