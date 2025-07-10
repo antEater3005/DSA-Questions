@@ -23,8 +23,8 @@ public:
     }
     void union_nodes(int u, int v) // Union by rank
     {
-        int parent_of_u = parent[u];
-        int parent_of_v = parent[v];
+        int parent_of_u = find_parent(u);
+        int parent_of_v = find_parent(v);
         if (rank[parent_of_u] > rank[parent_of_v])
             parent[parent_of_v] = parent_of_u;
         else if (rank[parent_of_u] < rank[parent_of_v])
